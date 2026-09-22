@@ -1,0 +1,43 @@
+/* RE is visually inside the shanyraq; NESS attaches outside it. */
+.piece.prefix {
+  background: #23845d;
+  color: #fff;
+}
+
+.piece.suffix {
+  background: #c63f3f;
+  color: #fff;
+}
+
+.piece.suffix.outside {
+  position: absolute;
+  left: calc(100% + 18px);
+  top: 50%;
+  z-index: 5;
+  transform: translateY(-50%);
+  padding: 12px 14px;
+  box-shadow: 0 4px 0 #8f2929, 0 8px 18px rgba(122,31,31,.22);
+}
+
+.piece.suffix.outside::before {
+  content: "+";
+  position: absolute;
+  right: calc(100% + 4px);
+  top: 50%;
+  transform: translateY(-50%);
+  color: #8d651e;
+  font-size: 22px;
+  font-weight: 900;
+}
+
+.formula.suffix i,
+.blue-bg { background: #c63f3f !important; }
+.blue-text { color: #c63f3f !important; }
+.modes .blue { background: #c63f3f; }
+.parts-panel { border-top-color: #c63f3f; }
+.chip.suffix { background: #fbe6e3; border-color: #dc8d85; color: #9e2f2f; }
+
+@media (max-width: 620px) {
+  .piece.suffix.outside { left: calc(100% + 8px); padding: 9px 8px; font-size: 12px; }
+  .piece.suffix.outside::before { font-size: 17px; right: calc(100% + 1px); }
+}

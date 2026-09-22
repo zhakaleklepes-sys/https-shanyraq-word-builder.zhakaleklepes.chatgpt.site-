@@ -54,8 +54,8 @@ export default function Home() {
       </aside>
       <section className="play-area"><div className="instruction"><span>👆</span><div><b>Жаңа сөз құрастыр</b><small>Төмендегі бөлшектерді таңда</small></div></div>
         <div className="shanyraq"><div className="outer-ring"><div className="cross one"/><div className="cross two"/><div className="inner-ring">
-          {parts.length?<div className="built-word">{parts.some(p=>p.role==='prefix')&&<span className="piece prefix">RE</span>}{parts.some(p=>p.role==='root')?<span className="piece root">{parts.find(p=>p.role==='root')?.text}</span>:<span className="slot">WORD</span>}{parts.some(p=>p.role==='suffix')&&<span className="piece suffix">NESS</span>}</div>:<div className="empty-state"><span>＋</span><b>ОСЫ ЖЕРГЕ<br/>СӨЗ ҚҰРАСТЫР</b></div>}
-        </div></div></div>
+          {parts.some(p=>p.role==='prefix'||p.role==='root')?<div className="built-word">{parts.some(p=>p.role==='prefix')&&<span className="piece prefix">RE</span>}{parts.some(p=>p.role==='root')?<span className="piece root">{parts.find(p=>p.role==='root')?.text}</span>:<span className="slot">WORD</span>}</div>:<div className="empty-state"><span>＋</span><b>ОСЫ ЖЕРГЕ<br/>СӨЗ ҚҰРАСТЫР</b></div>}
+        </div>{parts.some(p=>p.role==='suffix')&&<span className="piece suffix outside">NESS</span>}</div></div>
         <div className={`feedback ${translations[word]?'success':''}`} aria-live="polite">{message}</div><div className="actions"><button className="clear" onClick={()=>{setParts([]);setMessage('Қайтадан бастайық!')}}>Тазалау</button><button className="check" onClick={checkWord}>Тексеру ✓</button></div>
       </section>
       <aside className="parts-panel"><div className="parts-title"><p className="eyebrow">СӨЗ БӨЛШЕКТЕРІ</p><span>{choices.length}</span></div><p className="helper">Бөлшекті басып таңда</p><div className="chips">
