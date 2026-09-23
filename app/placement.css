@@ -1,4 +1,19 @@
 /* RE is visually inside the shanyraq; NESS attaches outside it. */
+.shanyraq {
+  width: min(430px, 86vw);
+  height: auto;
+  aspect-ratio: 1 / 1;
+  flex: 0 0 auto;
+  border-radius: 50%;
+  overflow: visible;
+}
+
+.outer-ring,
+.inner-ring {
+  aspect-ratio: 1 / 1;
+  border-radius: 50%;
+}
+
 .piece.prefix {
   background: #23845d;
   color: #fff;
@@ -38,6 +53,7 @@
 .chip.suffix { background: #fbe6e3; border-color: #dc8d85; color: #9e2f2f; }
 
 @media (max-width: 620px) {
+  .shanyraq { width: min(320px, 82vw); }
   .piece.suffix.outside { left: calc(100% + 8px); padding: 9px 8px; font-size: 12px; }
   .piece.suffix.outside::before { font-size: 17px; right: calc(100% + 1px); }
 }
