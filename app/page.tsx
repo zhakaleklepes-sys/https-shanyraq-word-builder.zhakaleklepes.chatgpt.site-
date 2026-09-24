@@ -6,6 +6,10 @@ type Mode = 'prefix' | 'suffix' | 'challenge';
 type Part = { text: string; role: 'prefix' | 'root' | 'suffix' };
 const prefixRoots = ['WRITE', 'READ', 'PLAY', 'USE', 'DO', 'BUILD', 'PAINT', 'START'];
 const suffixRoots = ['KIND', 'HAPPY', 'SAD', 'DARK', 'WEAK', 'ILL', 'SOFT', 'FAIR', 'POLITE', 'FRIENDLY'];
+const pictures: Record<string, string> = {
+  RE:'↩️', NESS:'✨', WRITE:'✍️', READ:'📖', PLAY:'⚽', USE:'🧰', DO:'✅', BUILD:'🧱', PAINT:'🎨', START:'🚀',
+  KIND:'🤝', HAPPY:'😄', SAD:'😢', DARK:'🌙', WEAK:'🪶', ILL:'🤒', SOFT:'🧸', FAIR:'⚖️', POLITE:'🙏', FRIENDLY:'🫂',
+};
 const translations: Record<string, string> = {
   REWRITE:'қайта жазу', REREAD:'қайта оқу', REPLAY:'қайта ойнау', REUSE:'қайта пайдалану', REDO:'қайта жасау', REBUILD:'қайта құру', REPAINT:'қайта бояу', RESTART:'қайта бастау',
   KINDNESS:'мейірімділік', HAPPINESS:'бақыт', SADNESS:'мұң', DARKNESS:'қараңғылық', WEAKNESS:'әлсіздік', ILLNESS:'ауру', SOFTNESS:'жұмсақтық', FAIRNESS:'әділдік', POLITENESS:'сыпайылық', FRIENDLINESS:'достық, жылы қарым-қатынас',
@@ -18,7 +22,6 @@ function resultOf(parts: Part[]) {
 export default function Home() {
   const [mode, setMode] = useState<Mode>('prefix');
   const [parts, setParts] = useState<Part[]>([]);
-  const [score, setScore] = useState(0);
   const [message, setMessage] = useState('Бөлшектерді таңдап, шаңыраққа орналастыр!');
   const [completed, setCompleted] = useState<string[]>([]);
   const roots = mode === 'prefix' ? prefixRoots : mode === 'suffix' ? suffixRoots : [...prefixRoots, ...suffixRoots];
@@ -33,13 +36,13 @@ export default function Home() {
   function checkWord() {
     if (translations[word]) {
       const isNew = !completed.includes(word);
-      if (isNew) { setScore(s=>s+10); setCompleted(c=>[...c,word]); }
-      setMessage(`Дұрыс! ${word} — ${translations[word]} ${isNew ? '+10 ұпай' : ''}`);
+      if (isNew) setCompleted(c=>[...c,word]);
+      setMessage(`Дұрыс! ${word} — ${translations[word]}`);
     } else setMessage('Тағы бір рет байқап көр. Бөлшектердің орнын тексер!');
   }
 
   return <main>
-    <header className="topbar"><div className="brand-mark">Ш</div><div><p className="eyebrow">АҒЫЛШЫН ТІЛІ • 4-СЫНЫП</p><h1>SHAŃYRAQ <span>WORD BUILDER</span></h1></div><div className="score"><small>ҰПАЙ</small><strong>{score}</strong><span>★</span></div></header>
+    <header className="topbar"><div className="brand-mark">Ш</div><h1 className="craft-title"><span>WORDCRAFT</span> <em>SHANYRAQ</em></h1></header>
     <nav className="modes" aria-label="Ойын режимдері">
       <button className={mode==='prefix'?'active green':''} onClick={()=>changeMode('prefix')}><b>1</b> PREFIX <small>алдына</small></button>
       <button className={mode==='suffix'?'active blue':''} onClick={()=>changeMode('suffix')}><b>2</b> SUFFIX <small>соңына</small></button>
@@ -59,7 +62,7 @@ export default function Home() {
         <div className={`feedback ${translations[word]?'success':''}`} aria-live="polite">{message}</div><div className="actions"><button className="clear" onClick={()=>{setParts([]);setMessage('Қайтадан бастайық!')}}>Тазалау</button><button className="check" onClick={checkWord}>Тексеру ✓</button></div>
       </section>
       <aside className="parts-panel"><div className="parts-title"><p className="eyebrow">СӨЗ БӨЛШЕКТЕРІ</p><span>{choices.length}</span></div><p className="helper">Бөлшекті басып таңда</p><div className="chips">
-        {choices.map(part=><button key={`${part.role}-${part.text}`} onClick={()=>addPart(part)} className={`chip ${part.role} ${parts.some(p=>p.role===part.role&&p.text===part.text)?'selected':''}`}><span className="ornament">◆</span>{part.role==='prefix'?`${part.text}-`:part.role==='suffix'?`-${part.text}`:part.text}</button>)}
+        {choices.map(part=><button key={`${part.role}-${part.text}`} onClick={()=>addPart(part)} className={`chip ${part.role} ${parts.some(p=>p.role===part.role&&p.text===part.text)?'selected':''}`}><span className="word-picture" aria-hidden="true">{pictures[part.text]}</span><span className="word-label">{part.role==='prefix'?`${part.text}-`:part.role==='suffix'?`-${part.text}`:part.text}</span></button>)}
       </div><div className="progress"><div><b>Жиналған сөздер</b><span>{completed.length} / {Object.keys(translations).length}</span></div><div className="bar"><i style={{width:`${completed.length/Object.keys(translations).length*100}%`}}/></div></div></aside>
     </section>
     <footer><span>ҚАЗАҚТЫҢ ШАҢЫРАҒЫ — БІРЛІК БЕЛГІСІ</span><b>Different parts come together to build one new word.</b></footer>

@@ -3,7 +3,7 @@ import './globals.css';
 import './placement.css';
 
 export const metadata: Metadata = {
-  title: 'Shańyraq Word Builder',
+  title: 'WORDCRAFT SHANYRAQ',
   description: '4-сынып оқушыларына арналған prefix және suffix ойыны.',
 };
 
