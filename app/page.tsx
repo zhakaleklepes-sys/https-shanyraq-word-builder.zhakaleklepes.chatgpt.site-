@@ -4,15 +4,19 @@ import { useMemo, useState } from 'react';
 
 type Mode = 'prefix' | 'suffix' | 'challenge';
 type Part = { text: string; role: 'prefix' | 'root' | 'suffix' };
-const prefixRoots = ['WRITE', 'READ', 'PLAY', 'USE', 'DO', 'BUILD', 'PAINT', 'START'];
-const suffixRoots = ['KIND', 'HAPPY', 'SAD', 'DARK', 'WEAK', 'ILL', 'SOFT', 'FAIR', 'POLITE', 'FRIENDLY'];
+const prefixRoots = ['WRITE', 'READ', 'PLAY', 'USE', 'DO', 'BUILD', 'PAINT', 'START', 'OPEN', 'TELL', 'NAME', 'CYCLE', 'PACK'];
+const suffixRoots = ['KIND', 'HAPPY', 'SAD', 'DARK', 'WEAK', 'ILL', 'SOFT', 'FAIR', 'POLITE', 'FRIENDLY', 'GOOD', 'BAD', 'CALM', 'BRIGHT', 'NEAT'];
 const pictures: Record<string, string> = {
-  RE:'↩️', NESS:'✨', WRITE:'✍️', READ:'📖', PLAY:'⚽', USE:'🧰', DO:'✅', BUILD:'🧱', PAINT:'🎨', START:'🚀',
-  KIND:'🤝', HAPPY:'😄', SAD:'😢', DARK:'🌙', WEAK:'🪶', ILL:'🤒', SOFT:'🧸', FAIR:'⚖️', POLITE:'🙏', FRIENDLY:'🫂',
+  RE:'↩️', NESS:'🧩', WRITE:'✍️', READ:'📖', PLAY:'⚽', USE:'🧰', DO:'✅', BUILD:'🧱', PAINT:'🎨', START:'🚀',
+  OPEN:'📂', TELL:'🗣️', NAME:'🏷️', CYCLE:'♻️', PACK:'🎒',
+  KIND:'🤝', HAPPY:'😄', SAD:'😢', DARK:'🌙', WEAK:'🪫', ILL:'🤒', SOFT:'🧸', FAIR:'⚖️', POLITE:'🙏', FRIENDLY:'🧑‍🤝‍🧑',
+  GOOD:'👍', BAD:'👎', CALM:'🧘', BRIGHT:'☀️', NEAT:'✨',
 };
 const translations: Record<string, string> = {
   REWRITE:'қайта жазу', REREAD:'қайта оқу', REPLAY:'қайта ойнау', REUSE:'қайта пайдалану', REDO:'қайта жасау', REBUILD:'қайта құру', REPAINT:'қайта бояу', RESTART:'қайта бастау',
+  REOPEN:'қайта ашу', RETELL:'қайта айтып беру', RENAME:'атын өзгерту', RECYCLE:'қайта өңдеу', REPACK:'қайта жинау',
   KINDNESS:'мейірімділік', HAPPINESS:'бақыт', SADNESS:'мұң', DARKNESS:'қараңғылық', WEAKNESS:'әлсіздік', ILLNESS:'ауру', SOFTNESS:'жұмсақтық', FAIRNESS:'әділдік', POLITENESS:'сыпайылық', FRIENDLINESS:'достық, жылы қарым-қатынас',
+  GOODNESS:'жақсылық', BADNESS:'жамандық', CALMNESS:'тыныштық', BRIGHTNESS:'жарықтық', NEATNESS:'ұқыптылық',
 };
 
 function resultOf(parts: Part[]) {
