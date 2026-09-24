@@ -20,7 +20,13 @@ const translations: Record<string, string> = {
 };
 
 function resultOf(parts: Part[]) {
-  return `${parts.find(p=>p.role==='prefix')?.text ?? ''}${parts.find(p=>p.role==='root')?.text ?? ''}${parts.find(p=>p.role==='suffix')?.text ?? ''}`;
+  const prefix = parts.find(p=>p.role==='prefix')?.text ?? '';
+  const root = parts.find(p=>p.role==='root')?.text ?? '';
+  const suffix = parts.find(p=>p.role==='suffix')?.text ?? '';
+  const spelledRoot = suffix === 'NESS' && root.endsWith('Y')
+    ? `${root.slice(0, -1)}I`
+    : root;
+  return `${prefix}${spelledRoot}${suffix}`;
 }
 
 export default function Home() {
