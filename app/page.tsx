@@ -9,8 +9,8 @@ const suffixRoots = ['KIND', 'HAPPY', 'SAD', 'DARK', 'WEAK', 'ILL', 'SOFT', 'FAI
 const pictures: Record<string, string> = {
   RE:'↩️', NESS:'🧩', WRITE:'✍️', READ:'📖', PLAY:'⚽', USE:'🧰', DO:'✅', BUILD:'🧱', PAINT:'🎨', START:'🚀',
   OPEN:'📂', TELL:'🗣️', NAME:'🏷️', CYCLE:'♻️', PACK:'🎒',
-  KIND:'🤝', HAPPY:'😄', SAD:'😢', DARK:'🌙', WEAK:'🪫', ILL:'🤒', SOFT:'🧸', FAIR:'⚖️', POLITE:'🙏', FRIENDLY:'🧑‍🤝‍🧑',
-  GOOD:'👍', BAD:'👎', CALM:'🧘', BRIGHT:'☀️', NEAT:'✨',
+  KIND:'🤝', HAPPY:'😄', SAD:'😢', DARK:'🌙', WEAK:'😩', ILL:'🤒', SOFT:'🧸', FAIR:'⚖️', POLITE:'🙏', FRIENDLY:'🧑‍🤝‍🧑',
+  GOOD:'👍', BAD:'👎', CALM:'🧘', BRIGHT:'☀️', NEAT:'🧹',
 };
 const translations: Record<string, string> = {
   REWRITE:'қайта жазу', REREAD:'қайта оқу', REPLAY:'қайта ойнау', REUSE:'қайта пайдалану', REDO:'қайта жасау', REBUILD:'қайта құру', REPAINT:'қайта бояу', RESTART:'қайта бастау',
@@ -46,7 +46,7 @@ export default function Home() {
   }
 
   return <main>
-    <header className="topbar"><div className="brand-mark">Ш</div><h1 className="craft-title"><span>WORDCRAFT</span> <em>SHANYRAQ</em></h1></header>
+    <header className="topbar"><h1 className="craft-title"><span>WORDCRAFT</span> <em>SHANYRAQ</em></h1></header>
     <nav className="modes" aria-label="Ойын режимдері">
       <button className={mode==='prefix'?'active green':''} onClick={()=>changeMode('prefix')}><b>1</b> PREFIX <small>алдына</small></button>
       <button className={mode==='suffix'?'active blue':''} onClick={()=>changeMode('suffix')}><b>2</b> SUFFIX <small>соңына</small></button>
